@@ -5,7 +5,6 @@
 
     // --WS
     import express             from 'express'
-    import { createServer }    from 'http'
     import { WebSocketServer } from 'ws'
 
     // --LIB
@@ -28,8 +27,8 @@
 
     // --THIS
     const
-    SERVER_PORT   = process.env.PORT || 8080,
-    SERVER_SERVER = createServer(express())
+    SERVER_PORT = process.env.PORT || 8080,
+    SERVER_APP  = express()
 
     const
     WSS_LOGIN = new WebSocketServer({ noServer: true }),
@@ -45,6 +44,7 @@
 // #\-VARIABLES-\
 
     // --THIS
+    let server_SERVER
 
 
 // #\-FUNCTIONS-\
@@ -52,14 +52,15 @@
     // --SET
     ;(function server_set()
     {
+        server_setVars()
         server_setEvents()
-
-        SERVER_SERVER.listen(SERVER_PORT)
     })()
+
+    function server_setVars() { server_SERVER = SERVER_APP.listen(SERVER_PORT, () => console.log('listening on port: ' + SERVER_PORT)) }
 
     function server_setEvents()
     {
-        SERVER_SERVER.on('upgrade', server_eUpgrade)
+        server_SERVER.on('upgrade', server_eUpgrade)
     }
 
     function wss_setNewClient(data)
