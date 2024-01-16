@@ -4,6 +4,7 @@
 // #\-IMPORTS-\
 
     // --WS
+    import express             from 'express'
     import { createServer }    from 'http'
     import { WebSocketServer } from 'ws'
 
@@ -28,7 +29,7 @@
     // --THIS
     const
     SERVER_PORT   = process.env.PORT || 8080,
-    SERVER_SERVER = createServer()
+    SERVER_SERVER = createServer(express())
 
     const
     WSS_LOGIN = new WebSocketServer({ noServer: true }),
