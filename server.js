@@ -52,9 +52,15 @@
     // --SET
     ;(function server_set()
     {
+        server_setRoutes()
         server_setVars()
         server_setEvents()
     })()
+
+    function server_setRoutes()
+    {
+        SERVER_APP.use('/', (req, res) => res.send('hello'))
+    }
 
     function server_setVars() { server_SERVER = SERVER_APP.listen(SERVER_PORT, () => console.log('listening on port: ' + SERVER_PORT)) }
 
